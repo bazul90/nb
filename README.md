@@ -1,81 +1,139 @@
-Flask MVP
+# Flask MVP
 
-This project is a Flask application built using the application factory pattern. It is currently at the initial scaffold stage, with core configuration and database setup completed.
+A minimal Flask web application built using the application factory pattern.
+This project demonstrates a scalable backend structure, database migrations, and environment-based configuration for rapid development.
 
-Project Structure
+---
+
+## 📌 Features
+
+* Application factory pattern
+* Modular project structure
+* SQLite database integration
+* Database migrations using Flask-Migrate (Alembic)
+* Environment variable configuration
+
+---
+
+## 📁 Project Structure
+
+```bash
 app/
-├── domain/
-│   ├── __init__.py
-│   ├── config.py
-│   ├── extensions.py
+│── domain/              # Business logic (models, services, etc.)
+│── __init__.py          # Application factory
+│── config.py            # Configuration settings
+│── extensions.py        # Flask extensions initialization
 
 instance/
-├── app.db
+│── app.db               # SQLite database
 
 migrations/
-│   ├── versions/
-│   ├── env.py
-│   ├── alembic.ini
-│   ├── script.py.mako
+│── versions/            # Migration files
+│── env.py
+│── alembic.ini
+│── script.py.mako
 
-run.py
-.gitignore
-venv/
-Setup Instructions
-1. Clone the repository
+run.py                   # Application entry point
+requirements.txt         # Project dependencies
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone the repository
+
+```bash
 git clone git@github.com:bazul90/nb.git
 cd nb
-2. Create virtual environment
-python3 -m venv venv
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+### 3. Activate the virtual environment
+
+```bash
+# Linux / Mac
 source venv/bin/activate
-3. Install dependencies
+
+# Windows
+venv\Scripts\activate
+```
+
+### 4. Install dependencies
+
+```bash
 pip install -r requirements.txt
-4. Environment setup
+```
 
-Create a .env file in the root directory:
+---
 
+## 🔐 Environment Variables
+
+Create a `.env` file in the root directory and add:
+
+```env
 FLASK_APP=run.py
 FLASK_ENV=development
 SECRET_KEY=dev
 DATABASE_URL=sqlite:///instance/app.db
-Database Setup (US-02)
+```
 
-The project uses Flask-Migrate for database version control.
+**Explanation:**
 
-To initialize or update the database:
+* `FLASK_APP` – Entry point of the application
+* `FLASK_ENV` – Enables development mode
+* `SECRET_KEY` – Used for session security
+* `DATABASE_URL` – Database connection string
 
-flask db upgrade
+---
 
-If setting up from scratch:
+## 🗄️ Database Setup
 
-flask db init
-flask db migrate -m "initial migration"
-flask db upgrade
-Running the Application
-python run.py
+This project uses Flask-Migrate for handling database migrations.
 
-or:
+```bash
+flask db migrate   # Generate migration files
+flask db upgrade   # Apply migrations to the database
+```
 
+---
+
+## ▶️ Running the Application
+
+```bash
 flask run
+```
 
-Then open:
+Or alternatively:
 
-http://127.0.0.1:5000
+```bash
+python run.py
+```
 
-Current Status
-US-01: Completed
-Application factory structure implemented
-Modular project layout created
-Configuration and extensions set up
-US-02: Completed / Configured
-Flask-Migrate integrated
-Database initialized with Alembic
-SQLite database configured in instance/
-Notes
-Flask application follows factory pattern
-SQLAlchemy setup handled via extensions
-Database migrations managed with Flask-Migrate
-Project structure prepared for scalable development
-Summary
+The app will be available at:
+http://127.0.0.1:5000/
 
-The project is in its initial scaffold stage with core infrastructure in place. Future work will focus on adding models, routes, and business logic layers.
+---
+
+## 🚧 Project Status
+
+This project is currently in development.
+Core structure and database setup are complete, with additional features planned.
+
+---
+
+## 🔮 Future Improvements
+
+* Add authentication (login/register)
+* Build RESTful API endpoints
+* Improve error handling and logging
+* Add unit and integration tests
+
+---
+
+
