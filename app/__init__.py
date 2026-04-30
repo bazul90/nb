@@ -12,4 +12,8 @@ def create_app():
     # IMPORTANT: force model registration
     from app.domain import user
 
+    # register auth routes
+    from app.views.auth import auth_bp
+    app.register_blueprint(auth_bp, url_prefix="/auth")
+
     return app
