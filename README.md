@@ -1,139 +1,182 @@
 # Flask MVP
 
-A minimal Flask web application built using the application factory pattern.
+A minimal Flask web application built using the application factory pattern.  
 This project demonstrates a scalable backend structure, database migrations, and environment-based configuration for rapid development.
 
 ---
 
 ## 📌 Features
 
-* Application factory pattern
-* Modular project structure
-* SQLite database integration
-* Database migrations using Flask-Migrate (Alembic)
-* Environment variable configuration
+- Application factory pattern
+- Modular project structure
+- SQLite database integration
+- Database migrations using Flask-Migrate (Alembic)
+- Environment variable configuration
+- User authentication system (Register & Login)
+- Password hashing for security
+- Input validation and error handling
 
 ---
 
 ## 📁 Project Structure
 
-```bash
-app/
-│── domain/              # Business logic (models, services, etc.)
-│── __init__.py          # Application factory
-│── config.py            # Configuration settings
-│── extensions.py        # Flask extensions initialization
+app/  
+├── domain/              (Models / business logic)  
+├── views/               (Routes / API endpoints)  
+├── __init__.py          (Application factory)  
+├── config.py            (Configuration settings)  
+└── extensions.py        (Flask extensions initialization)  
 
-instance/
-│── app.db               # SQLite database
+instance/  
+└── app.db               (SQLite database)  
 
-migrations/
-│── versions/            # Migration files
-│── env.py
-│── alembic.ini
-│── script.py.mako
+migrations/  
+├── versions/  
+├── env.py  
+├── alembic.ini  
+└── script.py.mako  
 
-run.py                   # Application entry point
-requirements.txt         # Project dependencies
-```
+run.py                   (Application entry point)  
+requirements.txt         (Project dependencies)  
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone the repository
+### Clone repository
+git clone git@github.com:bazul90/nb.git  
+cd nb  
 
-```bash
-git clone git@github.com:bazul90/nb.git
-cd nb
-```
+---
 
-### 2. Create a virtual environment
+### Create virtual environment
+python -m venv venv  
 
-```bash
-python -m venv venv
-```
+---
 
-### 3. Activate the virtual environment
+### Activate virtual environment
 
-```bash
-# Linux / Mac
-source venv/bin/activate
+Linux / Mac:
+source venv/bin/activate  
 
-# Windows
-venv\Scripts\activate
-```
+Windows:
+venv\Scripts\activate  
 
-### 4. Install dependencies
+---
 
-```bash
-pip install -r requirements.txt
-```
+### Install dependencies
+pip install -r requirements.txt  
 
 ---
 
 ## 🔐 Environment Variables
 
-Create a `.env` file in the root directory and add:
+Create a `.env` file in the root directory:
 
-```env
-FLASK_APP=run.py
-FLASK_ENV=development
-SECRET_KEY=dev
-DATABASE_URL=sqlite:///instance/app.db
-```
-
-**Explanation:**
-
-* `FLASK_APP` – Entry point of the application
-* `FLASK_ENV` – Enables development mode
-* `SECRET_KEY` – Used for session security
-* `DATABASE_URL` – Database connection string
+FLASK_APP=run.py  
+FLASK_ENV=development  
+SECRET_KEY=dev  
+DATABASE_URL=sqlite:///instance/app.db  
 
 ---
 
 ## 🗄️ Database Setup
 
-This project uses Flask-Migrate for handling database migrations.
-
-```bash
-flask db migrate   # Generate migration files
-flask db upgrade   # Apply migrations to the database
-```
+flask db migrate  
+flask db upgrade  
 
 ---
 
-## ▶️ Running the Application
+## ▶️ Run Application
 
-```bash
-flask run
-```
+flask run  
 
-Or alternatively:
+OR  
 
-```bash
-python run.py
-```
+python run.py  
 
-The app will be available at:
+Application runs at:
 http://127.0.0.1:5000/
+
+---
+
+## 🔐 Authentication System
+
+### Register User
+
+POST /auth/register  
+
+Request:
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "123456"
+}
+
+Rules:
+- Username required
+- Email required
+- Password required
+- Password must be at least 6 characters
+- Username must be unique
+- Email must be unique
+
+Response:
+{
+  "status": "success",
+  "message": "User registered successfully",
+  "data": {
+    "id": 1,
+    "username": "testuser",
+    "email": "test@example.com"
+  }
+}
+
+---
+
+### Login User
+
+POST /auth/login  
+
+Request:
+{
+  "email": "test@example.com",
+  "password": "123456"
+}
+
+Response:
+{
+  "status": "success",
+  "message": "Login successful",
+  "data": {
+    "id": 1,
+    "username": "testuser",
+    "email": "test@example.com"
+  }
+}
+
+---
+
+## 🔒 Security Features
+
+- Passwords are hashed before storing in database
+- Input validation for all endpoints
+- Duplicate email and username prevention
+- Secure login verification
 
 ---
 
 ## 🚧 Project Status
 
-This project is currently in development.
-Core structure and database setup are complete, with additional features planned.
+Backend structure complete.  
+Authentication system implemented and tested using Postman.
 
 ---
 
 ## 🔮 Future Improvements
 
-* Add authentication (login/register)
-* Build RESTful API endpoints
-* Improve error handling and logging
-* Add unit and integration tests
-
----
-
+- JWT authentication
+- Role-based access control
+- Unit testing
+- API documentation (Swagger)
 
